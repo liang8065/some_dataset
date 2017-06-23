@@ -5,24 +5,24 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def reformat(samples, labels):
-	# (图片高，图片宽，通道数，图片数) -> (图片数，图片高，图片宽，通道数)
-	new = np.transpose(samples, (3, 0, 1, 2)).astype(np.float32)
+    # (图片高，图片宽，通道数，图片数) -> (图片数，图片高，图片宽，通道数)
+    new = np.transpose(samples, (3, 0, 1, 2)).astype(np.float32)
 
-	# labels 变成 one-hot encoding, [2] -> [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
-	# digit 0 , represented as 10
-	# labels 变成 one-hot encoding, [10] -> [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-	labels = np.array([x[0] for x in labels])	# slow code, whatever
-	one_hot_labels = []
-	for num in labels:
-		one_hot = [0.0] * 10
-		if num == 10:
-			one_hot[0] = 1.0
-		else:
-			one_hot[num] = 1.0
-		one_hot_labels.append(one_hot)
-	labels = np.array(one_hot_labels).astype(np.float32)
+    # labels 变成 one-hot encoding, [2] -> [0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
+    # digit 0 , represented as 10
+    # labels 变成 one-hot encoding, [10] -> [1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    labels = np.array([x[0] for x in labels])	# slow code, whatever
+    one_hot_labels = []
+    for num in labels:
+        one_hot = [0.0] * 10
+        if num == 10:
+            one_hot[0] = 1.0
+        else:
+            one_hot[num] = 1.0
+        one_hot_labels.append(one_hot)
+    labels = np.array(one_hot_labels).astype(np.float32)
 
-	return new, labels
+    return new, labels
 
 def normalize(samples):
     '''
@@ -75,8 +75,8 @@ def inspect(dataset, labels, i):
     plt.show()
 
 
-train = load('../data/train_32x32.mat')
-test = load('../data/test_32x32.mat')
+train = load('./data/train_32x32.mat')
+test = load('./data/test_32x32.mat')
 
 #print("before reformat...")
 #print('Train Samples Shape:', train['X'].shape)
